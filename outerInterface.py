@@ -39,10 +39,10 @@ class AIModule:
     def __init__(self, tensor_list: list[str]):
         self.tensor_keys = tensor_list
         json_values = load_json()
+        self.load_config(json_values)
         self.queues = self.setup_queues(json_values)
         self.averages = self.setup_averages()
         self.cache = self.setup_occurrences()
-        self.load_config(json_values)
         self.client = start_mqtt(json_values)
 
     def setup_occurrences(self):
