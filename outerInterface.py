@@ -109,7 +109,7 @@ class AIModule:
 
 def start_mqtt(config):
     client = mqtt.Client(config["mqtt_client_name"])
-    client.connect(config["host"], keepalive=config["keepalive"])
+    client.connect(config["host"], keepalive=config["keepalive"], port="metti porta")
     client.subscribe(config["topic"])
     client.loop_start()
     return client
