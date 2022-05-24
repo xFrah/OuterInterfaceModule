@@ -31,12 +31,12 @@ class AIModule:
     topic: str
     default_phase: int
     big_packet: bool
-    queues: dict = {}
-    averages: dict[str, int] = {}
-    tensor_keys: list[str] = []
-    cache: dict = {}
+    queues = dict()
+    averages = dict()
+    tensor_keys = []
+    cache = dict()
 
-    def __init__(self, tensor_list: list[str]):
+    def __init__(self, tensor_list):
         self.tensor_keys = tensor_list
         json_values = load_json()
         self.load_config(json_values)
@@ -84,7 +84,7 @@ class AIModule:
 
         notify = False
         for t, array in self.queues.items():
-            occurrences: dict = self.cache[t]
+            occurrences = self.cache[t]
             new = int(tensors.get(t, 0))
 
             # QUEUE MANAGING
@@ -107,7 +107,7 @@ class AIModule:
             self.client.publish(self.topic, str(self.averages))
 
 
-def start_mqtt(config: dict):
+def start_mqtt(config):
     client = mqtt.Client(config["mqtt_client_name"])
     client.connect(config["host"], keepalive=config["keepalive"])
     client.subscribe(config["topic"])
